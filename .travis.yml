@@ -139,7 +139,7 @@ script:
 
 after_failure:
   - |
-    if [[ $BUILD_DOCS == false && $TRAVIS_PULL_REQUEST == false && $TRAVIS_REPO_SLUG == 'matplotlib/matplotlib' ]]; then
+    if [[ $BUILD_DOCS == false && $TRAVIS_PULL_REQUEST == false ]]; then
       gem install travis-artifacts
       cd $TRAVIS_BUILD_DIR/../tmp_test_dir
       tar cjf result_images.tar.bz2 result_images
