@@ -264,27 +264,27 @@ def test_nanscatter():
 
 @image_comparison(baseline_images=['not_covering_scatter'], extensions=['png'])
 def test_not_covering_scatter():
-	colors = ['b','g','r']
+    colors = ['b','g','r']
 
     for n in range(3):
         plt.scatter([n,],[n,],color=colors[n])
 
-	plt.legend(['foo','foo','foo'],loc='best')
-	plt.gca().set_xlim(-0.5, 2.2)
-	plt.gca().set_ylim(-0.5, 2.2)
+    plt.legend(['foo','foo','foo'],loc='best')
+    plt.gca().set_xlim(-0.5, 2.2)
+    plt.gca().set_ylim(-0.5, 2.2)
 
 
 @image_comparison(baseline_images=['not_covering_scatter_transform'], extensions=['png'])
 def test_not_covering_scatter_transform():
-	# Offsets point to top left, the default auto position
-	offset = mtrans.Affine2D().translate(-20, 17)
+    # Offsets point to top left, the default auto position
+    offset = mtrans.Affine2D().translate(-20, 17)
 
-	plt.plot(range(30))
+    plt.plot(range(30))
 
-	plt.scatter([20], [10], transform=offset + plt.gca().transData)
+    plt.scatter([20], [10], transform=offset + plt.gca().transData)
 
-	plt.legend(['foo'], loc='best')
-	
+    plt.legend(['foo'], loc='best')
+
 
 if __name__ == '__main__':
     import nose
