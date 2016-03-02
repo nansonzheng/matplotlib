@@ -766,7 +766,7 @@ class Legend(Artist):
                     vertices.append(offset)
 
         try:
-            vertices = np.concatenate((vertices, [l.vertices for l in lines]))
+            vertices = np.concatenate([l.vertices for l in lines] + vertices)
         except ValueError:
             vertices = np.array(vertices)
 
