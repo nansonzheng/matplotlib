@@ -737,6 +737,7 @@ class Legend(Artist):
         ax = self.parent
         bboxes = []
         lines = []
+        vertices = []
 
         for handle in ax.lines:
             assert isinstance(handle, Line2D)
@@ -755,10 +756,19 @@ class Legend(Artist):
                 transform = handle.get_transform()
                 bboxes.append(handle.get_path().get_extents(transform))
 
+        for handle in ax.collections:
+            transform, transOffset, offsets, paths = handle._prepare_points()
+
+            if len(offsets):
+                toffsets = transOffset.transform(offsets)
+
+                for offset in toffsets:
+                    vertices.append(offset)
+
         try:
-            vertices = np.concatenate([l.vertices for l in lines])
+            vertices = np.concatenate((vertices, [l.vertices for l in lines]))
         except ValueError:
-            vertices = np.array([])
+            vertices = np.array(vertices)
 
         return [vertices, bboxes, lines]
 
